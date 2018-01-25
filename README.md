@@ -13,3 +13,7 @@ NOTE: Every file or folder in a NTFS volume has a owner. If a PermissionError po
 On windows open the command-line as Administrator and type: "takeown /f <foldername> /r /d y"
 
 On Linux open terminal and type: "sudo chown -R username:group directory"
+
+To install the python3 modules open the python interpreter through the cmd/terminal and type:
+
+- pip install xlwt xlrd PyQt5
