@@ -1,5 +1,3 @@
-#! D:\Python\python3
-
 from os import listdir
 from os.path import isfile, join
 import xlwt
@@ -11,10 +9,9 @@ from PyQt5.QtGui import QIcon, QFont
 from subprocess import call
 
 class Window(QWidget):
-	"""Representation of a simple interface for parsing .txt files to an Excel workbook"""
-	def __init__(self):
-		super().__init__()
-		self.title = "Text to Excel"
+    def __init__(self):
+        super().__init__()
+        self.title = "Text to Excel"
         self.top = 30
         self.left = 30
         self.width = 550
@@ -114,5 +111,3 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     w = Window()
     sys.exit(app.exec_())
-		
-		
