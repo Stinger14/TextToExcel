@@ -20,7 +20,6 @@ class Window(QWidget):
 
     def initUI(self):
         self.setWindowTitle(self.title)
-        #self.setGeometry(self.left, self.top, self.width, self.height)
         self.l1 = QLabel(self)
         self.l1.setText("Especifique la ruta al directorio: ")
         self.l1.setFont(QFont('Sans Serif', 12))
@@ -81,8 +80,6 @@ class Window(QWidget):
 
 
     def window(self, p):
-        # dir que contiene todos los .txt que se que se desea convertir
-
         self.path = p
         textfiles = [ join(self.path,f) for f in listdir(self.path) \
                       if isfile(join(self.path,f)) and '.txt' in  f]
