@@ -4,7 +4,7 @@ import xlwt
 import xlrd
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, \
-    QInputDialog, QLineEdit, QHBoxLayout, QVBoxLayout, QMessageBox
+    QInputDialog, QLineEdit, QHBoxLayout, QVBoxLayout, QMessageBox, QFileDialog
 from PyQt5.QtGui import QIcon, QFont
 from subprocess import call
 
@@ -22,14 +22,15 @@ class Window(QWidget):
         self.setWindowTitle(self.title)
         #self.setGeometry(self.left, self.top, self.width, self.height)
         self.l1 = QLabel(self)
-        self.l1.setText("Especifique la ruta absoluta al directorio que "
-                        "contiene el o los archivos de texto \n"
-                        "que desea exportar a Excel.")
+        self.l1.setText("Especifique la ruta al directorio: ")
         self.l1.setFont(QFont('Sans Serif', 12))
 
         self.b1 = QPushButton("Convertir")
         self.b2 = QPushButton("Salir")
+        self.b3 = QPushButton("Ruta...")
         self.le = QLineEdit()
+        self.fd = QLineEdit()
+        self.fd = QFileDialog()
 
         h_box = QHBoxLayout()
         h_box.addStretch()
@@ -43,15 +44,25 @@ class Window(QWidget):
         v_box.addStretch()
         v_box.addWidget(self.le)
         v_box.addStretch()
+        v_box.addWidget(self.b3)
         v_box.addLayout(h_box)
         v_box.addStretch()
+
+        v_box2 = QVBoxLayout()
+        v_box2.addWidget(self.b3)
+        v_box2.addStretch()
 
         self.setLayout(v_box)
 
         self.b1.clicked.connect(self.btn_clicked)
         self.b2.clicked.connect(self.btn_clicked)
+        self.b3.clicked.connect(self.btn_clicked)
 
         self.show()
+
+    def _openFile(self):
+        path = str(QFileDialog.getExistingDirectory())
+        self.le.setText('{}'.format(path))
 
     def btn_clicked(self):
         sender = self.sender()
@@ -60,8 +71,13 @@ class Window(QWidget):
             QMessageBox.about(self, "Notificación", "Conversión de archivos "
                                                     "completada")
             self.le.clear()
+
         elif sender.text() == 'Salir':
             sys.exit(0)
+
+        elif sender.text() == 'Ruta...':
+            self._openFile()
+
 
 
     def window(self, p):
